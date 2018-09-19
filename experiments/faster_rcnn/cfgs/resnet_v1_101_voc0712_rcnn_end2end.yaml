@@ -54,7 +54,7 @@ dataset:
   image_set: 2007_trainval+2012_trainval
   root_path: "./data"
   test_image_set: 2007_test
-  proposal: rpn
+  proposal: selective_search
 TRAIN:
   lr: 0.0005
   lr_step: '4.83'
@@ -74,9 +74,9 @@ TRAIN:
   # whether use OHEM
   ENABLE_OHEM: false
   # size of images for each device, 2 for rcnn, 1 for rpn and e2e
-  BATCH_IMAGES: 1
+  BATCH_IMAGES: 2
   # e2e changes behavior of anchor loader and metric
-  END2END: true
+  END2END: false
   # group images with similar aspect ratio
   ASPECT_GROUPING: true
   # R-CNN
@@ -132,7 +132,7 @@ TRAIN:
   - 0.2
 TEST:
   # use rpn to generate proposal
-  HAS_RPN: true
+  HAS_RPN: false
   # size of images for each device
   BATCH_IMAGES: 1
   # RPN proposal

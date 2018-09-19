@@ -179,3 +179,26 @@ class RCNNL1LossMetric(mx.metric.EvalMetric):
 
         self.sum_metric += np.sum(bbox_loss)
         self.num_inst += num_inst
+
+
+class WSDDNMetric(mx.metric.EvalMetric):
+    def __init__(self):
+        super(WSDDNMetric, self).__init__('WSDDN')
+        
+
+    def update(self, labels, preds):
+        bbox_loss = preds[0].asnumpy()
+        # calculate num_inst (average on those kept anchors)
+        self.sum_metric += np.sum(bbox_loss)
+        self.num_inst += 1
+
+class SPMetric(mx.metric.EvalMetric):
+    def __init__(self):
+        super(SPMetric, self).__init__('SP')
+        
+    def update(self, labels, preds):
+        bbox_loss = preds[1].asnumpy()
+        # calculate num_inst (average on those kept anchors)
+        self.sum_metric += np.sum(bbox_loss)
+        self.num_inst += 1
+

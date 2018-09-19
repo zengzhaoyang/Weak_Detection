@@ -491,12 +491,17 @@ class DataParallelExecutorGroup(object):
         if label_shapes is not None:
             input_shapes.update(dict(label_shapes))
 
+        #input_shapes.pop('bbox_target')
+        #input_shapes.pop('bbox_weight')
         arg_shapes, _, aux_shapes = self.symbol.infer_shape(**input_shapes)
         assert arg_shapes is not None, "shape inference failed"
 
         input_types = {x.name: x.dtype for x in data_shapes}
         if label_shapes is not None:
             input_types.update({x.name: x.dtype for x in label_shapes})
+
+        #input_types.pop('bbox_target')
+        #input_types.pop('bbox_weight')
         arg_types, _, aux_types = self.symbol.infer_type(**input_types)
         assert arg_types is not None, "type inference failed"
 
